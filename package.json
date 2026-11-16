@@ -1,0 +1,14 @@
+{
+  "name": "pi-clipboard-paste",
+  "version": "1.0.0",
+  "description": "Paste multiple copied files (paths separated by spaces), clipboard images, and text on Windows via Alt+V (or Ctrl+V where the terminal forwards it)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dado1234ad/pi-clipboard-paste"
+  },
+  "type": "module",
+  "keywords": ["pi-package"],
+  "pi": {
+    "extensions": ["./extensions/clipboard-paste.js"]
+  }
+}
