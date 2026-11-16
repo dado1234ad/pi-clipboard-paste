@@ -2,6 +2,10 @@
 
 Paste copied files, clipboard images, and text into [pi](https://pi.dev) on Windows with one keystroke.
 
+```bash
+pi install git:github.com/dado1234ad/pi-clipboard-paste@main
+```
+
 - **Several files copied in Explorer** → their full paths, separated by spaces
 - **Copied image** (screenshot, snip, bitmap) → saved to a temp PNG, path pasted
 - **Plain text** → pasted as-is
@@ -87,3 +91,7 @@ which is why no extra tooling is needed for screenshots.
 Remove the package from `~/.pi/agent/settings.json`, delete the folder, and restore
 the built-in paste by removing the `app.clipboard.pasteImage` entry from
 `~/.pi/agent/keybindings.json`.
+
+## License
+
+[MIT](LICENSE) © DarkNeptune
