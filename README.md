@@ -1,48 +1,43 @@
 # pi-clipboard-paste
 
-Clipboard paste for [pi](https://github.com/earendil-works/pi) on Windows.
+Ctrl+V paste for [pi](https://pi.dev) on Windows.
 
-Press **Alt+V** (or **Ctrl+V** in terminals that forward it) to insert:
-
-- **Copied files** — the paths of everything copied in Explorer, separated by spaces.
-- **Clipboard images** — screenshots (Win+Shift+S / Snipping Tool), copied bitmaps — written to a temporary PNG whose path is inserted.
-- **Plain text** — inserted as-is.
-
-In bash mode (an editor line starting with `!`), file paths are shell-quoted.
-
-## Why Alt+V?
-
-Windows terminals reserve Ctrl+V for their own paste action (Windows Terminal, classic conhost). That action can paste text and copied file paths, but it cannot paste a bitmap, so a raw snip does nothing. Pi therefore treats **Alt+V** as the clipboard paste key on Windows; Ctrl+V is also registered and works in terminals that forward the key (e.g. Tern).
+- Copies of several files in Explorer -> their paths, separated by spaces
+- Copied image (screenshot, snip, bitmap) -> a temp PNG path
+- Plain text -> pasted as-is
 
 ## Install
 
 ```bash
-pi install git:github.com/dado1234ad/pi-clipboard-paste
+git clone https://github.com/dado1234ad/pi-clipboard-paste.git
 ```
 
-Or add it to `~/.pi/agent/settings.json`:
+Then add the package to `~/.pi/agent/settings.json`:
 
 ```json
 {
-  "packages": ["git:github.com/dado1234ad/pi-clipboard-paste"]
+  "packages": ["./packages/pi-clipboard-paste"]
 }
 ```
 
-Then run `pi update --extensions` (or restart pi).
+and run `/reload` inside pi.
 
 ## How it works
 
-- Images and text come from pi-tui's native clipboard helper (`getImage()` / `getText()`). Windows returns a DIB/BMP buffer, which is converted to PNG before it is written.
-- The file drop list (CF_HDROP) is not exposed by the native helper, so a tiny persistent helper (`bin/clipget.exe`) reads it in ~0.5 ms. If the helper is missing, PowerShell's `Get-Clipboard -Format FileDropList` is used as a slower fallback.
+Node cannot read Windows' file drop list (`CF_HDROP`), so `bin/clipget.exe`
+is a tiny persistent helper that does. First paste costs ~130ms while it
+starts; later pastes are ~0.5ms. `src/clipget.cs` is the source, rebuilt with
+the .NET Framework C# compiler if the binary is missing.
 
-## Rebuilding the helper
+## Keybindings
 
-`src/clipget.cs` is a small .NET Framework console app:
+`~/.pi/agent/keybindings.json`:
 
-```bash
-C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe ^
-  /nologo /r:System.Windows.Forms.dll ^
-  /out:bin\clipget.exe src\clipget.cs
+```json
+{
+  "app.clipboard.pasteImage": []
+}
 ```
 
-The extension falls back to PowerShell if the executable is absent, so the build is optional.
+This unbinds the built-in paste so the extension can own `ctrl+v` (and `alt+v`)
+without a shortcut-conflict warning.
