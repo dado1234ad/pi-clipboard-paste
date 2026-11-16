@@ -1,7 +1,7 @@
 {
   "name": "pi-clipboard-paste",
   "version": "1.0.0",
-  "description": "Paste multiple copied files (paths separated by spaces), clipboard images, and text on Windows via Alt+V (or Ctrl+V where the terminal forwards it)",
+  "description": "Paste copied file paths (space-separated), clipboard images, and text in pi on Windows via Ctrl+V or Alt+V",
   "repository": {
     "type": "git",
     "url": "https://github.com/dado1234ad/pi-clipboard-paste"
