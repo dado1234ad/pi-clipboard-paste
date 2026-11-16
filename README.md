@@ -17,6 +17,22 @@ transcript, and degrade gracefully on text-only models.
 
 ## Install
 
+Install straight from GitHub — pi clones it and keeps it updated:
+
+```bash
+pi install git:github.com/dado1234ad/pi-clipboard-paste@main
+```
+
+Then run `/reload` inside pi (or restart it).
+
+To try it without adding it to your settings:
+
+```bash
+pi -e git:github.com/dado1234ad/pi-clipboard-paste@main
+```
+
+### Manual install
+
 Clone into your pi agent directory:
 
 ```bash
@@ -31,8 +47,6 @@ Add the package to `~/.pi/agent/settings.json`:
   "packages": ["./packages/pi-clipboard-paste"]
 }
 ```
-
-Then run `/reload` inside pi (or restart it).
 
 ## Keybindings
 

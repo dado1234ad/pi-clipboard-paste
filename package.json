@@ -2,12 +2,25 @@
   "name": "pi-clipboard-paste",
   "version": "1.0.0",
   "description": "Paste copied file paths (space-separated), clipboard images, and text in pi on Windows via Ctrl+V or Alt+V",
+  "keywords": [
+    "pi-extension",
+    "pi-package",
+    "windows",
+    "clipboard"
+  ],
+  "homepage": "https://github.com/dado1234ad/pi-clipboard-paste#readme",
+  "bugs": {
+    "url": "https://github.com/dado1234ad/pi-clipboard-paste/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dado1234ad/pi-clipboard-paste"
+    "url": "git+https://github.com/dado1234ad/pi-clipboard-paste.git"
   },
   "type": "module",
-  "keywords": ["pi-package"],
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*"
+  },
   "pi": {
     "extensions": ["./extensions/clipboard-paste.js"]
   }
